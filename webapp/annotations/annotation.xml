@@ -1,0 +1,101 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/Northwind/Northwind.svc/$metadata">
+        <edmx:Include Namespace="NorthwindModel"  Alias="Northwindy" />
+    </edmx:Reference>
+
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Northwind">
+            <Annotations Target="NorthwindModel.Product">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>CategoryID</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductID" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label"  String="Supplier Name" />
+                            <PropertyValue Property="Value" Path="Supplier/CompanyName"/>    
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label"  String="Category Name" />
+                            <PropertyValue Property="Value" Path="Category/CategoryName"/>    
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="NorthwindModel.Product/CategoryID">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Categories" />
+                        <PropertyValue Property="SearchSupported" Bool="true" />
+                        
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="CategoryID" />
+                                    <PropertyValue Property="ValueListProperty" String="CategoryID" />
+                                    
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CategoryName" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <!-- below for drop down box- if need description ABAP code + other approach
+                    <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+				<Annotation Term="Common.ValueList">
+                    <Record>
+						<PropertyValue Property="CollectionPath" String="Categories"/>
+						<PropertyValue Property="SearchSupported" Bool="true"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="CategoryID"/>
+									<PropertyValue Property="ValueListProperty" String="CategoryID"/>
+								</Record>
+                                
+							</Collection>
+						</PropertyValue>
+					</Record>
+                </Annotation> -->
+            </Annotations>
+
+            <Annotations Target="Northwindy.Product/SupplierID">
+                <Annotation Term="Common.ValueList">
+                        <Record Type="Common.ValueListType">
+                            <PropertyValue Property="CollectionPath" String="Suppliers" />
+                        <PropertyValue Property="SearchSupported" Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="SupplierID" />
+                                    <PropertyValue Property="ValueListProperty" String="SupplierID" />
+                                  
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly"  >
+                                    <PropertyValue Property="ValueListProperty" String="CompanyName" ></PropertyValue >
+                                </Record >
+                            </Collection>    
+                        </PropertyValue>
+                        </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

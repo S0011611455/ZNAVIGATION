@@ -1,0 +1,251 @@
+{
+    "_version": "1.40.0",
+    "sap.app": {
+        "id": "com.wakefern.znavigation",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.7.0",
+            "toolsId": "2b0da74c-3d98-4545-b8ee-bca62ae2ca4f"
+        },
+        "dataSources": {
+            "remoteEmployees": {
+                "uri": "/Northwind/Northwind.svc/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "remoteProducts":{
+                "uri": "/Northwind/Northwind.svc/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.114.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.wakefern.znavigation.i18n.i18n"
+                }
+            },
+            "employeesModel": {
+                "dataSource": "remoteEmployees"
+            },
+            "": {
+                "dataSource": "remoteProducts"
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "com.wakefern.znavigation.view",
+                "controlAggregation": "pages",
+                "transition": "slide",
+                "bypassed": {
+                    "target": [
+                        "notFound"
+                    ]
+                },
+                "controlId": "idApp",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "appHome",
+                    "target": [
+                        "home"
+                    ]
+                },
+                {
+                    "pattern": "employees",
+                    "name": "employeeList",
+                    "target": [
+                        "employees"
+                    ]
+                },
+                {
+                    "pattern": "employees/overview:?query:",
+                    "name": "employeeOverview",
+                    "target": [
+                        "employeeOverviewTop",
+                        "employeeOverviewContent"
+                    ]
+                },
+                {
+                    "pattern": "products",
+                    "name": "productList",
+                    "target": [
+                        "products"
+                    ]
+                },
+                {
+                    "pattern": "employees/{employeeId}",
+                    "name": "employee",
+                    "target": [
+                        "employee"
+                    ]
+                },
+                {
+                    "pattern": "employees/{employeeId}/resume:?query:",
+                    "name": "employeeResume",
+                    "target": [
+                        "employeeResume"
+                    ]
+                }
+            ],
+            "targets": {
+                "home": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "viewId": "home",
+                    "viewName": "Home",
+                    "level": 1
+                },
+                "notFound": {
+                    "viewType": "XML",
+                    "viewId": "notFound",
+                    "viewName": "NotFound",
+                    "transition": "show"
+                },
+                "employees": {
+                    "viewType": "XML",
+                    "viewId": "employeeList",
+                    "path": "com.wakefern.znavigation.view",
+                    "viewName": "EmployeeList",
+                    "viewLevel": 2
+                },
+                "products": {
+                    "viewType": "XML",
+                    "viewId": "productList",
+                    "path": "com.wakefern.znavigation.view",
+                    "viewName": "ProductList",
+                    "viewLevel": 2       
+                },
+                "employee": {
+                    "viewId": "employee",
+                    "viewName": "Employee",
+                    "viewLevel": 3
+                },
+                "employeeResume": {
+                    "viewId": "resume",
+                    "viewName": "Resume",
+                    "viewLevel": 4,
+                    "transition": "flip"
+                },
+                "resumeTabHobbies": {
+                    "viewId": "resumeHobbies",
+                    "parent": "employeeResume",
+                    "path": "com.wakefern.znavigation.view",
+                    "viewName": "ResumeHobbies",
+                    "controlId": "hobbiesTab",
+                    "controlAggregation": "content"
+                },
+                "resumeTabNotes": {
+                    "viewId": "resumeNotes",
+                    "parent": "employeeResume",
+                    "viewPath": "com.wakefern.znavigation.view",
+                    "viewName": "ResumeNotes",
+                    "controlId": "notesTab",
+                    "controlAggregation": "content"
+                },
+                "employeeOverview": {
+                    "viewId": "employeeOverview",
+                    "viewPath": "com.wakefern.znavigation.view",
+                    "viewName": "EmployeeOverview",
+                    "viewLevel": 2
+                },
+                "employeeOverviewTop": {
+                    "viewId": "employeeOverviewTop",
+                    "parent": "employeeOverview",
+                    "viewPath": "com.wakefern.znavigation.view",
+                    "viewName": "EmployeeOverviewTop",
+                    "controlId": "EmployeeOverviewParent",
+                    "controlAggregation": "content"
+                },
+                "employeeOverviewContent": {
+                    "viewId": "employeeOverviewContent",
+                    "parent": "employeeOverview",
+                    "viewPath": "com.wakefern.znavigation.view",
+                    "viewName": "EmployeeOverviewContent",
+                    "controlId": "EmployeeOverviewParent",
+                    "controlAggregation": "content"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "com.wakefern.znavigation.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    }
+}

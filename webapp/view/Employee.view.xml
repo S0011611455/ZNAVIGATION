@@ -1,0 +1,73 @@
+<mvc:View controllerName="com.wakefern.znavigation.controller.Employee"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" busyIndicatorDelay="0">
+	<Page id="employeePage" title="{i18n>EmployeeDetailsOf} {employeesModel>FirstName} {employeesModel>LastName}" showNavButton="true" navButtonPress="onNavBack" class="sapUiResponsiveContentPadding">
+		<content>
+			<Panel id="employeePanel" width="auto" class="sapUiResponsiveMargin sapUiNoContentPadding">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title text="{i18n>EmployeeIDColon} {employeesModel>EmployeeID}" level="H2"/>
+						<ToolbarSpacer />
+						<Link text="{i18n>FlipToResume}" tooltip="{i18n>FlipToResume.tooltip}" press=".onShowResume"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+
+
+					<f:SimpleForm minWidth="1024" editable="false" layout="ResponsiveGridLayout" labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="false" >
+						<f:content>
+							<core:Title text="Office" />	
+							<Label text="{i18n>formFirstName}"/>
+							<Text text="{employeesModel>FirstName}"/>
+							<Label text="{i18n>formLastName}"/>
+							<Text text="{employeesModel>LastName}"/>
+							<Label text="{i18n>formAddress}"/>
+							<Text text="{employeesModel>Address}"/>
+							<Label text="{i18n>formCity}"/>
+							<Text text="{employeesModel>City}, {employeesModel>Region}"/>
+							<Label text="{i18n>formPostalCode}"/>
+							<Text text="{employeesModel>PostalCode}"/>
+							<Label text="{i18n>formPhoneHome}"/>
+							<Text text="{employeesModel>HomePhone}"/>
+							<Label text="{i18n>formCountry}"/>
+							<Text text="{employeesModel>Country}"/>
+							<core:Title text="Photo" />
+							<Image id="myImage1" src="{
+                    path : 'employeesModel>Photo',
+                    formatter : '.formatter.trimSuperfluousBytes'
+                  }" />
+
+						</f:content>
+					</f:SimpleForm>
+
+					<!-- <HBox id="rightHBox" justifyContent="End" class="" width="100%">
+						<Panel id="Right-panel" visible="true">
+
+							<Image id="myImage" src="{
+                    path : 'employeesModel>Photo',
+                    formatter : '.formatter.trimSuperfluousBytes'
+                  }" />
+						</Panel>
+					</HBox> -->
+
+
+				</content>
+			</Panel>
+		</content>
+	</Page>
+</mvc:View>

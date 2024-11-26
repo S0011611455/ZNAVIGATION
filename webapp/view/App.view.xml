@@ -1,0 +1,5 @@
+<mvc:View controllerName="com.wakefern.znavigation.controller.App"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" height="100%"
+    xmlns="sap.m">
+    <App id="idApp" />
+</mvc:View>

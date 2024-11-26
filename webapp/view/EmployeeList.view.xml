@@ -1,0 +1,33 @@
+<mvc:View
+	controllerName="com.wakefern.znavigation.controller.EmployeeList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" height="100%">
+	<Page
+		id="employeeListPage"
+		title="{i18n>EmployeeList}"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		class="sapUiResponsiveContentPadding">
+		<content>
+			<List id="employeeList" headerText="{i18n>ListOfAllEmployees}" items="{employeesModel>/Employees}">
+				<items>
+					<StandardListItem
+						title="{employeesModel>FirstName} {employeesModel>LastName}"
+						iconDensityAware="false"
+						iconInset="false"
+						type="Navigation"
+						press="onItemPressed"> 
+						<avatar>
+						<Avatar
+						src="{ path: 'employeesModel>Photo', formatter: '.formatter.formatPhoto'}"  
+						displayShape="Square"
+						imageFitType="Cover"
+						showBorder="true"
+						 />
+						</avatar>
+						</StandardListItem>
+				</items>
+			</List>
+		</content>
+	</Page>
+</mvc:View>
